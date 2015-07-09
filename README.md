@@ -1,8 +1,8 @@
 # Penny
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/penny`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Ever wanted to get a penny but they're always out of stock?
+Fear no more!
+With Penny it's easy to build a bot that monitors the price and availability!
 
 ## Installation
 
@@ -16,13 +16,32 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install penny
-
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require 'penny'
+
+twenty_two_inches = "http://www.pennyskateboards.com/eu/shop/by-size/penny-original-22.html/"
+boards = Penny::Boards.new(twenty_two_inches).all
+
+boards.each do |board|
+  if board.available?
+    puts "yeay! the #{board.name} is available and it costs #{board.price}. Get it here: #{board.url}"
+  else
+    puts "nein! the #{board.name} is not available. that makes me a sad panda."
+  end
+end
+```
+
+A Penny::Board responds to:
+
+```ruby
+board.name       # => Jojo penny board
+board.url        # => http://www.pennyskateboards.com/eu/penny-space-22-inch.html
+board.price      # => 49.99 (Float)
+board.image      # => http://media.pennyskateboards.com/something.jpg
+board.available? # => true
+```
 
 ## Development
 
@@ -32,7 +51,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/penny. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/eljojo/penny. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
 ## License
